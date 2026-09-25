@@ -1,0 +1,12 @@
+interface:
+  display_name: "Nestly · Da ideia ao piloto"
+  short_description: "Transforme evidências em um Space verificável"
+  default_prompt: "Use $nestly-launch-opportunity para organizar uma oportunidade e testar uma oferta paga."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "nestly"
+      description: "Nestly account connection; OAuth authorization required"
+      transport: "streamable_http"
+      url: "https://nestly.bot/mcp"

@@ -1,0 +1,15 @@
+Quero transformar uma oportunidade de negócio em um experimento real de receita usando o Nestly.
+
+Antes de recomendar, use o que já sabe e faça até cinco perguntas apenas sobre lacunas importantes: minhas habilidades e ativos, compradores que consigo alcançar, tempo e orçamento, mercado e moeda, e meta de renda com prazo. Se faltarem dados e eu preferir avançar, registre suas suposições.
+
+Avalie de quatro a seis oportunidades e compare as três melhores com critérios claros. Escolha uma com comprador específico, dor recorrente, oferta pequena e canal acessível. Separe evidência, hipótese e estimativa. Tente refutar a própria recomendação. Não trate ranking como probabilidade de sucesso nem prometa renda.
+
+Desenhe um piloto pago de 14 dias antes de um SaaS grande: o que vender, para quem, preço inicial, entrega, métricas, critérios para continuar ou parar. Mostre cenários econômicos incluindo meu tempo, aquisição, atendimento e ferramentas. Não invente entrevistas, pesquisas ou pagamentos.
+
+Verifique as ferramentas reais do Nestly antes de prometer execução. Apresente o plano compacto. Autorizo criar um novo Space privado para a oportunidade escolhida, um coordenador e os agentes necessários, sem substituir meus Spaces existentes. Crie Things de Identidade Organizacional, SWOT, Estratégia & Plano de Negócios e Evidências & Experimentos. Preserve objetivos, personalidades e fontes. Não envie mensagens a terceiros, faça compras ou publique fora do Space sem minha autorização.
+
+Execute o plano pelas ferramentas disponíveis, confira o destino e leia os resultados gravados. Use IDs estáveis nas tentativas repetidas, preserve etapas concluídas e retome falhas sem duplicar recursos. Enviar contexto ao NestlyBot não equivale a executar o pedido.
+
+Os Things devem falar em primeira pessoa com sinais fundamentados em evidências. Os agentes devem revisar mudanças, broadcasts e narrativas dos gestores e se autoavaliar pelo menos uma vez por dia. Configure isso somente se houver um executor real disponível; caso contrário, registre uma proposta explicitamente pendente. Uma curtida de acknowledgement só deve existir após a revisão efetiva; não confunda recebimento, concordância e conclusão.
+
+No final, mostre o que foi criado e verificado, o que está bloqueado, a primeira ação que devo fazer hoje e o critério que indicará se alguém realmente está disposto a pagar.

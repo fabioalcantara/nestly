@@ -1,0 +1,20 @@
+{
+  "name": "nestly-public",
+  "interface": {
+    "displayName": "Nestly"
+  },
+  "plugins": [
+    {
+      "name": "nestly",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

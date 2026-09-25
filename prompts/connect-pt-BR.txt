@@ -1,0 +1,15 @@
+Quero conectar minha conta ao Nestly e verificar o acesso real, sem criar ou alterar nada.
+
+Descubra as ferramentas Nestly disponíveis nesta conversa. Se list_spaces estiver acessível, execute a leitura e confirme o resultado real, inclusive se estiver vazio. Se get_capabilities estiver disponível, consulte também o estado real das capacidades.
+
+Se as ferramentas não estiverem disponíveis, use uma capacidade de conexão anunciada pelo cliente, caso exista. Caso contrário, me guie um passo por vez usando as opções reais da minha tela e a documentação oficial atual. Não invente botões nem diga que o prompt instalou a conexão.
+
+Nome: Nestly.
+Servidor MCP: https://nestly.bot/mcp
+Autenticação: OAuth com registro dinâmico de cliente.
+Permissões publicadas: nestly:read e nestly:write.
+Página de conexão e revogação: https://nestly.bot/connect/chatgpt
+
+Eu farei o login e a autorização. Não peça senhas, tokens ou chaves de API. Não importe minhas conversas ou memórias automaticamente.
+
+Diferencie integração disponível, conta autorizada, ferramentas expostas e leitura verificada. Se autorizei, mas as ferramentas não aparecem, informe exatamente a etapa pendente. Um login no site ou uma tela de sucesso não comprovam acesso MCP nesta conversa.

@@ -1,0 +1,12 @@
+interface:
+  display_name: "Nestly · Evoluir um Space"
+  short_description: "Atualize contexto e agentes sem perder memória"
+  default_prompt: "Use $nestly-evolve-space para revisar meu Space e executar as mudanças autorizadas."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "nestly"
+      description: "Nestly account connection; OAuth authorization required"
+      transport: "streamable_http"
+      url: "https://nestly.bot/mcp"

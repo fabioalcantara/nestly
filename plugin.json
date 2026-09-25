@@ -1,0 +1,13 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "nestly",
+  "version": "0.1.0",
+  "description": "Connect to Nestly, turn business ideas into verified Spaces, and steward agents and living Things.",
+  "author": {
+    "name": "Fabio Alcantara",
+    "url": "https://github.com/fabioalcantara"
+  },
+  "homepage": "https://nestly.bot/connect/chatgpt",
+  "repository": "https://github.com/fabioalcantara/nestly",
+  "keywords": ["nestly", "context", "agents", "living-documents", "mcp"]
+}
