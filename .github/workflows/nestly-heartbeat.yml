@@ -1,0 +1,88 @@
+name: Nestly heartbeat
+
+on:
+  schedule:
+    - cron: '2/5 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/nestly-heartbeat.yml'
+
+permissions: {}
+
+concurrency:
+  group: nestly-heartbeat
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    if: github.repository == 'fabioalcantara/nestly' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      id-token: write
+    steps:
+      - name: Run authenticated heartbeat
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFile } from 'node:fs/promises';
+
+          const endpoint = 'https://nestly.bot/api/lifecycle';
+          const requestUrl = process.env.ACTIONS_ID_TOKEN_REQUEST_URL;
+          const requestToken = process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN;
+          if (!requestUrl || !requestToken) {
+            throw new Error('GitHub OIDC credentials unavailable.');
+          }
+          const oidcUrl = new URL(requestUrl);
+          oidcUrl.searchParams.set('audience', endpoint);
+          const oidcResponse = await fetch(oidcUrl, {
+            headers: { Authorization: `Bearer ${requestToken}` },
+            signal: AbortSignal.timeout(20_000)
+          });
+          if (!oidcResponse.ok) {
+            throw new Error(`OIDC issuance failed (HTTP ${oidcResponse.status}).`);
+          }
+          const oidc = await oidcResponse.json();
+          if (typeof oidc.value !== 'string' || !oidc.value) {
+            throw new Error('OIDC response did not contain a token.');
+          }
+          process.stdout.write(`::add-mask::${oidc.value}\n`);
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${oidc.value}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ action: 'tick' }),
+            signal: AbortSignal.timeout(220_000)
+          });
+          if (!response.ok) {
+            // Do not log response bodies: they may contain account diagnostics.
+            throw new Error(`Nestly heartbeat failed (HTTP ${response.status}).`);
+          }
+          const result = await response.json();
+          if (result.ok !== true) {
+            throw new Error('Nestly did not confirm heartbeat success.');
+          }
+          const summary = { httpStatus: response.status, ok: true };
+          for (const key of ['processed', 'successful', 'failed', 'ownersWithErrors', 'pendingReviews', 'completedReviews', 'sharedProcessed', 'sharedDecisions', 'sharedPending', 'sharedFailed']) {
+            if (Number.isSafeInteger(result[key]) && result[key] >= 0) summary[key] = result[key];
+          }
+          console.log(JSON.stringify(summary));
+          if (process.env.GITHUB_STEP_SUMMARY) {
+            await appendFile(process.env.GITHUB_STEP_SUMMARY,
+              `Nestly heartbeat accepted. HTTP ${summary.httpStatus}.\n\n` +
+              'Only aggregate health is shown. This does not assert that every entity was reviewed.\n');
+          }
+          if (result.modelConfigured === false) {
+            throw new Error('The server reports no configured model provider.');
+          }
+          if (Number.isSafeInteger(result.failed) && result.failed > 0) {
+            throw new Error(`Heartbeat completed with ${result.failed} owner error(s); inspect private Nestly health details.`);
+          }
+          if (Number.isSafeInteger(result.sharedFailed) && result.sharedFailed > 0) {
+            throw new Error('Shared Space review failed; inspect private Nestly health details.');
+          }
+          NODE
