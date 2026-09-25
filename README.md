@@ -42,7 +42,7 @@ Always discover live tools and schemas. The baseline includes Space/agent/Thing 
 - `send_to_nestlybot` delivers context; it does not execute the enclosed instructions.
 - `create_task` proposes a task; it is not a background schedule.
 - A saved or simulated schedule is not a verified autonomous run.
-- An acknowledgement means an entity evaluated an event; it is distinct from agreement or task completion.
+- Distinguish received/queued acknowledgements from reviewed events. Only a completed evaluation record proves review; neither state implies agreement or task completion.
 - A screenshot shows visible state; receipts and read-back verify persisted results.
 
 See [the contract guidance](docs/contract.md) and [evaluation scenarios](tests/scenarios.json).

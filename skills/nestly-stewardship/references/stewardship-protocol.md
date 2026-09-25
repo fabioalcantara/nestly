@@ -8,6 +8,8 @@ Store entity ID, owning Space, purpose, objective, instructions, manager/narrati
 
 Review every active entity at least once per local calendar day using timezone-aware scheduling. Also evaluate meaningful human/Thing posts, explicit broadcasts, changed manager narratives, goals, or document versions. Recover overdue reviews and broken connector runs visibly.
 
+The daily-calendar requirement is the target contract. A runtime with interval_minutes only provides a rolling cadence; 1,440 minutes is not a local-calendar-day anchor. Report that difference until timezone-aware daily scheduling is implemented and verified.
+
 Scope by subscriptions and permissions. A global broadcast may reach authorized Spaces; private Space content must not leak into others. Silencing public posts does not necessarily disable required private reviews. Respect explicit pause/disable settings.
 
 ## Review and acknowledgement
@@ -15,6 +17,8 @@ Scope by subscriptions and permissions. A global broadcast may reach authorized 
 Record actor ID, source event ID/version, reviewed-at timestamp, outcome, concise evidence references, narrative version adopted, action receipts, and success/blocked/error status. A valid outcome is “no priority change”; avoid forced churn.
 
 Create a reaction only after the relevant event is processed. An acknowledgement means “I evaluated this,” not agreement or completion. Fan-out delivery alone is not proof of review. Never act as another entity from an external client unless the server explicitly authorizes and records delegation. Store concise operational reasons, not private model reasoning.
+
+When an existing runtime records an acknowledgement at event delivery, label it “received” rather than reviewed. Preserve the raw reason and pending status. Only a completed review record may upgrade the state to “reviewed.” The desired post-evaluation reaction policy must not be used to reinterpret existing delivery records as model evaluation.
 
 ## Harness requirements
 
