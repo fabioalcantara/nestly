@@ -35,6 +35,14 @@ For clients that import individual skills, choose a complete folder under `skill
 
 This repository is a distributable source package, not evidence of approval in the public ChatGPT plugin directory. Directory publication and an end-to-end installation test are separate release gates. In clients that cannot import it, the plain-text prompts remain usable as instructions, with the same capability checks.
 
+## Project bootstrap blueprints
+
+For new applications, services, workers, agent systems, MCP servers, mobile clients, data workloads, or major re-scaffolds, Codex, Claude, and other implementation agents must consult [the Quick-Start Blueprint Library](docs/quick-start-blueprint-library.md) before selecting a framework or generating a scaffold.
+
+The library favors a small set of maintained, composable upstream foundations rather than starting from zero or accumulating near-duplicate boilerplates. Root `AGENTS.md` and `CLAUDE.md` make this bootstrap check explicit for their respective agents.
+
+Selections should be intent-first. Record upstream sources and important deviations, verify maintenance and licensing, and treat the agent harness, tests, build path, thin-slice validation, and acceptance evidence as part of the project foundation.
+
 ## Runtime compatibility
 
 Always discover live tools and schemas. The baseline includes Space/agent/Thing reads and writes, context delivery, and proposed tasks. Newer servers may expose capabilities and durable plan execution. A skill mentions those tools conditionally and must verify them before use.
