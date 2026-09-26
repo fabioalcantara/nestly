@@ -12,6 +12,25 @@ Mutations: `create_space`, `create_agent`, `update_agent`, `archive_agent`, `res
 
 `send_to_nestlybot` records delivered context only. `create_task` records a proposed commitment only. Neither implies autonomous execution. The server controls tenant identity; never send invented owner IDs or attempt cross-account operations.
 
+## Project bootstrap doctrine
+
+When an implementation agent is asked to create a new project, application, service, worker, agent system, MCP server, mobile client, data workload, or perform a major re-scaffold, it MUST read `docs/quick-start-blueprint-library.md` before selecting the foundation or generating the scaffold.
+
+The agent must:
+- select by project intent rather than framework preference;
+- prefer the smallest maintained canonical blueprint that fits;
+- compose distinct blueprints when that is cleaner than forcing one starter to cover unrelated responsibilities;
+- verify the upstream source, maintenance state, license, and relevant security/dependency posture;
+- record the chosen upstream source(s) and important deviations;
+- avoid importing secrets, credentials, environment files, telemetry identifiers, or unrelated product history;
+- preserve portable Nestly domain boundaries where practical;
+- include an agent-operable harness, tests, build/run instructions, acceptance criteria, and verification evidence as part of the foundation;
+- document a blueprint gap if no current canonical foundation fits.
+
+A successful code generation step is not sufficient evidence that a bootstrap is complete. Follow the acceptance gate in the Blueprint Library.
+
+Root `AGENTS.md` and `CLAUDE.md` repeat this requirement for Codex and Claude. Ordinary edits that do not create or substantially re-architect a project do not require a bootstrap-library review.
+
 ## Capability-gated newer servers
 
 Use `get_capabilities`, `prepare_plan`, `execute_plan`, `get_run`, and `list_runs` only if exposed. Read returned capability state and schemas. Preparation is a preview; execution changes state and must stay within the user's authorized scope. Track real run/step states and verify outputs before saying complete. A failed or partial run must remain visibly partial.
