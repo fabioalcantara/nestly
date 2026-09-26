@@ -2,7 +2,7 @@
 
 ## Mandatory bootstrap check
 
-Before you create a new project, application, service, worker, agent system, MCP server, mobile client, data workload, or substantially res scaffold an existing project, read:
+Before you create a new project, application, service, worker, agent system, MCP server, mobile client, data workload, or substantially re-scaffold an existing project, read:
 
 - `docs/quick-start-blueprint-library.md`
 
