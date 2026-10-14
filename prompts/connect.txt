@@ -1,0 +1,24 @@
+I want to connect my account to Nestly and verify real access, without creating or changing anything.
+
+Discover the Nestly tools available in this conversation. If list_spaces is available, run that read and report the real result, including an empty list. If get_capabilities is available, also report the real capability state.
+
+If the tools are not available, use a connection capability the client advertises, when one exists. Otherwise guide me one step at a time using the options actually on my screen and the current official client documentation. Do not invent buttons, and do not claim that this prompt installed the connection.
+
+Name: Nestly.
+Canonical MCP server: https://nestly.bot/api/mcp
+Transport: Streamable HTTP.
+Alias once deployed: https://nestly.bot/mcp
+Authentication: OAuth 2.1 with PKCE S256 and dynamic client registration.
+Registration: https://nestly.bot/oauth/register
+Authorization: https://nestly.bot/oauth/authorize
+Token: https://nestly.bot/oauth/token
+Published scopes: nestly:read and nestly:write.
+Redirects: any safe https redirect registered through dynamic client registration, plus loopback redirects.
+Public guide: https://nestly.bot/connect/mcp
+Clients: Claude, Cursor, ChatGPT, and other standard MCP clients.
+
+I will sign in and authorize. Do not ask for passwords, tokens, or API keys. Do not import my conversations or memories.
+
+Magic-link sign-in works for members. If my address is not a member, say that an admin must grant access from Inbox with Conceder entrada por email (action grant).
+
+Distinguish an available integration, an authorized account, exposed tools, and a verified read. If I authorized and the tools are still absent, name the pending step. A website login or a success screen does not prove MCP access in this conversation.
