@@ -9,4 +9,4 @@ dependencies:
       value: "nestly"
       description: "Nestly account connection; OAuth authorization required"
       transport: "streamable_http"
-      url: "https://nestly.bot/mcp"
+      url: "https://nestly.bot/api/mcp"

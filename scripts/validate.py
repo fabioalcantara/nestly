@@ -14,7 +14,16 @@ EXPECTED_SKILLS = {
     "nestly-connect-verify", "nestly-launch-opportunity",
     "nestly-evolve-space", "nestly-stewardship",
 }
-ENDPOINT = "https://nestly.bot/mcp"
+ENDPOINT = "https://nestly.bot/api/mcp"
+PUBLIC_GUIDE = "https://nestly.bot/connect/mcp"
+STALE_GUIDE = "connect/" + "chatgpt"
+CONNECTION_DOCS = (
+    "README.md",
+    "docs/mcp.md",
+    "docs/contract.md",
+    "skills/nestly-connect-verify/SKILL.md",
+    "prompts/connect.txt",
+)
 
 
 def load_json(root: Path, relative: str):
@@ -42,6 +51,15 @@ def validate(root: Path = ROOT):
     require(bool(re.fullmatch(r"\d+\.\d+\.\d+", manifest.get("version", ""))), "Invalid version")
     require(bool(manifest.get("description")), "Missing description")
     require(manifest.get("repository") == "https://github.com/fabioalcantara/nestly", "Unexpected public repository")
+    require(manifest.get("homepage") == PUBLIC_GUIDE, "Homepage must be the public MCP guide")
+    require(not (root / "prompts/connect-pt-BR.txt").exists(), "English connection prompt replaces prompts/connect-pt-BR.txt")
+    for relative in CONNECTION_DOCS:
+        text = (root / relative).read_text(encoding="utf-8")
+        require(ENDPOINT in text, f"Canonical MCP endpoint missing: {relative}")
+        require("https://nestly.bot/oauth/register" in text, f"DCR endpoint missing: {relative}")
+        require("S256" in text, f"PKCE S256 missing: {relative}")
+        require(PUBLIC_GUIDE in text, f"Public MCP guide missing: {relative}")
+        require("Conceder entrada por email" in text and "grant" in text, f"Membership grant missing: {relative}")
     mcp = load_json(root, "mcp.json")
     require(mcp.get("$schema") == "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json", "Portable MCP schema missing")
     require(mcp.get("mcpServers") == {"nestly": {"type": "streamable-http", "url": ENDPOINT}}, "Unexpected MCP endpoint, transport, or embedded credentials")
@@ -82,6 +100,7 @@ def validate(root: Path = ROOT):
         raw = path.read_text(encoding="utf-8")
         require(not re.search(r"(?:sk-proj-|ghp_|github_pat_)[A-Za-z0-9_-]{20,}", raw), f"Possible credential: {path.name}")
         require(not re.search(r"plugin_asdk_app_[a-z0-9]{20,}", raw), f"Personal connector ID: {path.name}")
+        require(STALE_GUIDE not in raw, f"ChatGPT-only connection page: {path.name}")
     return {"skills": len(found), "scenarios": len(scenarios), "status": "structural checks passed"}
 
 

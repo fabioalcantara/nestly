@@ -13,11 +13,23 @@ Skills guide an assistant. Nestly's server supplies permissions, data, execution
 
 ## Connect your account
 
-Use [Nestly's connection page](https://nestly.bot/connect/chatgpt). The remote MCP endpoint is `https://nestly.bot/mcp`, authenticated with OAuth and dynamic client registration. Published scopes are `nestly:read` and `nestly:write`. Every user authorizes their own account; never share API keys or tokens in a prompt.
+Use the [public MCP guide](https://nestly.bot/connect/mcp). The same connection contract is written up in [the MCP guide in this repository](docs/mcp.md).
 
-If your ChatGPT account supports custom MCP connections, follow the current [official quickstart](https://developers.openai.com/plugins/quickstart). Menu availability depends on the client, account, and administrator. A pasted prompt cannot install a connector or guarantee that its tools are exposed. The [connection prompt](prompts/connect-pt-BR.txt) guides setup and verifies a real read without creating anything.
+The canonical remote endpoint is `https://nestly.bot/api/mcp` (Streamable HTTP). `https://nestly.bot/mcp` is an alias of that endpoint once the alias is deployed. Configure clients with the canonical URL.
 
-After authorization, enable the connection in the conversation and request a Space list. An empty list is a successful test. If tools are absent, report that stage; a successful website login does not establish MCP access. After server metadata changes, follow the client's refresh procedure and retest.
+Authorization is OAuth 2.1 with PKCE (`S256`) and dynamic client registration:
+
+- Register a client at `https://nestly.bot/oauth/register`
+- Authorize at `https://nestly.bot/oauth/authorize`
+- Exchange tokens at `https://nestly.bot/oauth/token`
+
+Published scopes are `nestly:read` and `nestly:write`. Any safe `https` redirect URI registered through dynamic client registration is accepted, and loopback redirects are accepted. Claude, Cursor, ChatGPT, and other standard MCP clients can connect. Every person authorizes their own account. Never share API keys or tokens in a prompt.
+
+Magic-link sign-in works for members. An admin grants access from Inbox with **Conceder entrada por email** (action `grant`).
+
+Follow the MCP setup flow published for the client in use. Menu availability depends on the client, account, and administrator. A pasted prompt cannot install a connector or guarantee that its tools are exposed. The [connection prompt](prompts/connect.txt) guides setup and verifies a real read without creating anything.
+
+After authorization, enable the connection in the conversation and request a Space list. An empty list is a successful test. If tools are absent, report that stage. A successful website login does not establish MCP access. After server metadata changes, follow the client's refresh procedure and retest.
 
 ## Use this package
 
@@ -33,7 +45,7 @@ Then inspect and install Nestly from that source using the client's supported pl
 
 For clients that import individual skills, choose a complete folder under `skills/` and connect the MCP server separately. Import support differs across clients. Ask the assistant to use one of the named workflows once it is available.
 
-This repository is a distributable source package, not evidence of approval in the public ChatGPT plugin directory. Directory publication and an end-to-end installation test are separate release gates. In clients that cannot import it, the plain-text prompts remain usable as instructions, with the same capability checks.
+This repository is a distributable source package. Directory publication and an end-to-end installation test are separate release gates. In clients that cannot import it, the plain-text prompts remain usable as instructions, with the same capability checks.
 
 ## Project bootstrap blueprints
 

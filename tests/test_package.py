@@ -56,6 +56,13 @@ class PackageTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Private evidence"):
             validator.validate(self.root)
 
+    def test_rejects_chatgpt_only_connection_page(self):
+        readme = self.root / "README.md"
+        stale = "https://nestly.bot/" + "connect/" + "chatgpt"
+        readme.write_text(readme.read_text(encoding="utf-8") + "\n" + stale + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "ChatGPT-only"):
+            validator.validate(self.root)
+
     def test_rejects_duplicate_scenario(self):
         path = self.root / "tests/scenarios.json"
         cases = json.loads(path.read_text())

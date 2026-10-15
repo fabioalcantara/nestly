@@ -3,7 +3,7 @@
   "mcpServers": {
     "nestly": {
       "type": "streamable-http",
-      "url": "https://nestly.bot/mcp"
+      "url": "https://nestly.bot/api/mcp"
     }
   }
 }
